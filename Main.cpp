@@ -264,12 +264,12 @@ int main(){
     clock_t time1, time2, time_diff;
     srand(time(NULL));
 
-	vector<string> materiais;
-	vector<string> birds;
-	vector<string> pigs;
-	vector<string> block;
+  vector<string> materiais;
+  vector<string> birds;
+  vector<string> pigs;
+  vector<string> block;
 
-	ReadFile(materiais, birds, pigs, block);
+  ReadFile(materiais, birds, pigs, block);
 
     double positionXinicial;
     do{
@@ -306,14 +306,14 @@ int main(){
     Block arrayBlocks[numBlocks];
 
     for(int i = 0; i < numBlocks; i++){
-        /*if(i == 0){
+        if(i == 0){
             auxSelecionaBlock = 4;
         } else if(i == 1){
             auxSelecionaBlock = 3;
         } else {
             auxSelecionaBlock = 2;
         }//*/
-        auxSelecionaBlock = rand() % block.size();
+        //auxSelecionaBlock = rand() % block.size();
         arrayBlocks[i].setId(auxSelecionaBlock);
         arrayBlocks[i].setName(block[auxSelecionaBlock]);
         arrayBlocks[i].setMaterial(materiais[rand() % materiais.size()]);
@@ -344,7 +344,7 @@ int main(){
         //------------------------------------------------------------------------------------- CRIANDO BLOCKS CONEXOS INICIO -------------------------------------------------------------------------------------\\//
     int contBlocks = 0;
     double auxXmirror[numBlocks] = {-9};
-    resetMatrix(drawGrid, sizeXGrid);
+    resetMatrix(drawGrid, sizeXGridMatriz);
     time1 = clock() / (CLOCKS_PER_SEC / 1000);
     backtracking(drawGrid, arrayBlocks, auxXmirror, contBlocks, numBlocks, sizeXGrid, sizeXGridMatriz, positionXinicial);
     time2 = clock() / (CLOCKS_PER_SEC / 1000);
@@ -373,10 +373,10 @@ int main(){
 }
 
 void ReadFile(vector<string> & materiais, vector<string> & birds, vector<string> & pigs, vector<string> & block){
-	//ofstream arqCriaBoxColliderBlocks;
+  //ofstream arqCriaBoxColliderBlocks;
 
-	ifstream arqCSAngryBirds;
-	arqCSAngryBirds.open("ABConstants.cs", ios::in); //abre o arquivo ABConstants.cs, que esta no caminho ../ScienceBirds-master/Assets/Scripts/Utils/, a partir da pasta deste arquivo
+  ifstream arqCSAngryBirds;
+  arqCSAngryBirds.open("ABConstants.cs", ios::in); //abre o arquivo ABConstants.cs, que esta no caminho ../ScienceBirds-master/Assets/Scripts/Utils/, a partir da pasta deste arquivo
 
     if (arqCSAngryBirds.fail()) { //verifica se a abertura foi feita corretamente, caso contrario ele apresenta uma mensagem...
         cerr << "Falha ao abrir arquivo de Leitura.\n"; //de erro na tela e returna 1 finaliando o programa.
@@ -386,50 +386,50 @@ void ReadFile(vector<string> & materiais, vector<string> & birds, vector<string>
     bool finishedRead = false;
     string leArquivoAngryBirds;
     while(arqCSAngryBirds >> leArquivoAngryBirds){
-    	if(leArquivoAngryBirds == "enum"){
-    		arqCSAngryBirds >> leArquivoAngryBirds;
-	    	if(leArquivoAngryBirds == "MATERIALS"){
-	    		while(arqCSAngryBirds >> leArquivoAngryBirds){
-	    			if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
-	    				continue;
-	    			} else if(leArquivoAngryBirds == "};"){
-	    				break;
-	    			}
-	    			materiais.push_back(leArquivoAngryBirds);
-	    		}
-	    	} else if(leArquivoAngryBirds == "BIRDS"){
-	    		while(arqCSAngryBirds >> leArquivoAngryBirds){
-	    			if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
-	    				continue;
-	    			} else if(leArquivoAngryBirds == "};"){
-	    				break;
-	    			}
-	    			birds.push_back(leArquivoAngryBirds);
-	    		}
-	    	} else if(leArquivoAngryBirds == "PIGS"){
-	    		while(arqCSAngryBirds >> leArquivoAngryBirds){
-	    			if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
-	    				continue;
-	    			} else if(leArquivoAngryBirds == "};"){
-	    				break;
-	    			}
-	    			pigs.push_back(leArquivoAngryBirds);
-	    		}
-	    	} else if(leArquivoAngryBirds == "BLOCKS"){
-	    		while(arqCSAngryBirds >> leArquivoAngryBirds){
-	    			if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
-	    				continue;
-	    			} else if(leArquivoAngryBirds == "};"){
-	    				break;
-	    			}
-	    			block.push_back(leArquivoAngryBirds);
-	    		}
-	    		finishedRead = true;
-	    	}
-	    	if(finishedRead){
-	    		break;
-	    	} 
-    	}
+      if(leArquivoAngryBirds == "enum"){
+        arqCSAngryBirds >> leArquivoAngryBirds;
+        if(leArquivoAngryBirds == "MATERIALS"){
+          while(arqCSAngryBirds >> leArquivoAngryBirds){
+            if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
+              continue;
+            } else if(leArquivoAngryBirds == "};"){
+              break;
+            }
+            materiais.push_back(leArquivoAngryBirds);
+          }
+        } else if(leArquivoAngryBirds == "BIRDS"){
+          while(arqCSAngryBirds >> leArquivoAngryBirds){
+            if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
+              continue;
+            } else if(leArquivoAngryBirds == "};"){
+              break;
+            }
+            birds.push_back(leArquivoAngryBirds);
+          }
+        } else if(leArquivoAngryBirds == "PIGS"){
+          while(arqCSAngryBirds >> leArquivoAngryBirds){
+            if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
+              continue;
+            } else if(leArquivoAngryBirds == "};"){
+              break;
+            }
+            pigs.push_back(leArquivoAngryBirds);
+          }
+        } else if(leArquivoAngryBirds == "BLOCKS"){
+          while(arqCSAngryBirds >> leArquivoAngryBirds){
+            if(leArquivoAngryBirds == "{" || leArquivoAngryBirds == ","){
+              continue;
+            } else if(leArquivoAngryBirds == "};"){
+              break;
+            }
+            block.push_back(leArquivoAngryBirds);
+          }
+          finishedRead = true;
+        }
+        if(finishedRead){
+          break;
+        } 
+      }
     }
 }
 
@@ -456,8 +456,8 @@ void openFileWrite(const int numberXml, const Block *arrayBlocks, const int numB
     arqXml << numBrids;
     arqXml << afterBirds;
     for(int i = 0; i < numBlocks; i++){
-		arqXml << "      <Block type=\"" << arrayBlocks[i].getName() << "\" material=\"" << arrayBlocks[i].getMaterial() << "\" x=\"" << arrayBlocks[i].getX() << "\" y=\"" << arrayBlocks[i].getY() << "\" />\n";
-		arqXml << "      <Block type=\"" << arrayBlocks[i].getName() << "\" material=\"" << arrayBlocks[i].getMaterial() << "\" x=\"" << auxXmirror[i] << "\" y=\"" << arrayBlocks[i].getY() << "\" />\n";
+    arqXml << "      <Block type=\"" << arrayBlocks[i].getName() << "\" material=\"" << arrayBlocks[i].getMaterial() << "\" x=\"" << arrayBlocks[i].getX() << "\" y=\"" << arrayBlocks[i].getY() << "\" />\n";
+    arqXml << "      <Block type=\"" << arrayBlocks[i].getName() << "\" material=\"" << arrayBlocks[i].getMaterial() << "\" x=\"" << auxXmirror[i] << "\" y=\"" << arrayBlocks[i].getY() << "\" />\n";
     }
     arqXml << finishedXml;
     arqXml.close();
@@ -484,7 +484,7 @@ void openFileWrite(const int numberMatrix, int **drawGrid, const int sizeXGrid, 
     } else{
         for(int i = 0; i < sizeYGrid; i++){
             for(int j = 0; j < sizeXGridMatriz; j++){
-                if(j == sizeXGrid){
+                if(j == (sizeXGridMatriz - sizeXGrid)){
                     arqMatrix << "| ";
                 }
                 arqMatrix << drawGrid[j][i] << ' ';
@@ -533,10 +533,10 @@ double changePositionObjectMirror(const Block & b, float percentagem){
     }
 }
 
-void resetMatrix(int **drawGrid, int x){
+void resetMatrix(int **drawGrid, int sizeXGridMatriz){
     for(int i = 0; i < sizeYGrid; i++){
-        for(int j = 0; j < x; j++){
-            if(i == (sizeYGrid - 1) || (j == 0)){
+        for(int j = 0; j < sizeXGridMatriz; j++){
+            if((i == (sizeYGrid - 1)) || (j == 0)){
                 drawGrid[j][i] = -1;
             } else{
                 drawGrid[j][i] = 0;
@@ -556,7 +556,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
     switch(b.getId()){
         case 0:
         {
-            //			cout << "\n-----------------CIRCLE--------------------\n";
+            //      cout << "\n-----------------CIRCLE--------------------\n";
             if(((y - CIRCLEX) >= 0) && ((x - CIRCLEY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - CIRCLEX;
                 sizeX = x - CIRCLEY;
@@ -658,7 +658,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 1:
         {
-            //			cout << "\n-----------------SMALLCIRCLE--------------------\n";
+            //      cout << "\n-----------------SMALLCIRCLE--------------------\n";
             if(((y - SMALLCIRCLEX) >= 0) && ((x - SMALLCIRCLEY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - SMALLCIRCLEX;
                 sizeX = x - SMALLCIRCLEY;
@@ -760,7 +760,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 2:
         {
-            //			cout << "\n-----------------RECTBIGLYING--------------------\n";
+            //      cout << "\n-----------------RECTBIGLYING--------------------\n";
             if(((y - RECTBIGLYINGX) >= 0) && ((x - RECTBIGLYINGY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTBIGLYINGX;
                 sizeX = x - RECTBIGLYINGY;
@@ -862,7 +862,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 3:
         {
-            //			cout << "\n-----------------RECTBIGSTANDING--------------------\n";
+            //      cout << "\n-----------------RECTBIGSTANDING--------------------\n";
             if(((y - RECTBIGLYINGY) >= 0) && ((x - RECTBIGLYINGX) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTBIGLYINGY;
                 sizeX = x - RECTBIGLYINGX;
@@ -964,7 +964,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 4:
         {
-            //			cout << "\n-----------------RECTFATLYING--------------------\n";
+            //      cout << "\n-----------------RECTFATLYING--------------------\n";
             if(((y - RECTFATLYINGY) >= 0) && ((x - RECTFATLYINGX) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTFATLYINGY;
                 sizeX = x - RECTFATLYINGX;
@@ -1066,7 +1066,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 5:
         {
-            //			cout << "\n-----------------RECTFATSTANDING--------------------\n";
+            //      cout << "\n-----------------RECTFATSTANDING--------------------\n";
             if(((y - RECTFATLYINGX) >= 0) && ((x - RECTFATLYINGY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTFATLYINGX;
                 sizeX = x - RECTFATLYINGY;
@@ -1168,7 +1168,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 6:
         {
-            //			cout << "\n-----------------RECTMEDIUMLYING--------------------\n";
+            //      cout << "\n-----------------RECTMEDIUMLYING--------------------\n";
             if(((y - RECTMEDIUMLYINGX) >= 0) && ((x - RECTMEDIUMLYINGY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTMEDIUMLYINGX;
                 sizeX = x - RECTMEDIUMLYINGY;
@@ -1270,7 +1270,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 7:
         {
-            //			cout << "\n-----------------RECTMEDIUMSTANDING--------------------\n";
+            //      cout << "\n-----------------RECTMEDIUMSTANDING--------------------\n";
             if(((y - RECTMEDIUMLYINGY) >= 0) && ((x - RECTMEDIUMLYINGX) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTMEDIUMLYINGY;
                 sizeX = x - RECTMEDIUMLYINGX;
@@ -1373,7 +1373,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 8:
         {
-            //			cout << "\n-----------------RECTSMALLLYING--------------------\n";
+            //      cout << "\n-----------------RECTSMALLLYING--------------------\n";
             if(((y - RECTSMALLLYINGX) >= 0) && ((x - RECTSMALLLYINGY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTSMALLLYINGX;
                 sizeX = x - RECTSMALLLYINGY;
@@ -1475,7 +1475,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 9:
         {
-            //			cout << "\n-----------------RECTSMALLSTANDING--------------------\n";
+            //      cout << "\n-----------------RECTSMALLSTANDING--------------------\n";
             if(((y - RECTSMALLLYINGY) >= 0) && ((x - RECTSMALLLYINGX) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTSMALLLYINGY;
                 sizeX = x - RECTSMALLLYINGX;
@@ -1577,7 +1577,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 10:
         {
-            //			cout << "\n-----------------RECTTINYLYING--------------------\n";
+            //      cout << "\n-----------------RECTTINYLYING--------------------\n";
             if(((y - RECTTINYLYINGX) >= 0) && ((x - RECTTINYLYINGY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTTINYLYINGX;
                 sizeX = x - RECTTINYLYINGY;
@@ -1679,7 +1679,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 11:
         {
-            //			cout << "\n-----------------RECTTINYSTANDING--------------------\n";
+            //      cout << "\n-----------------RECTTINYSTANDING--------------------\n";
             if(((y - RECTTINYLYINGY) >= 0) && ((x - RECTTINYLYINGX) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - RECTTINYLYINGY;
                 sizeX = x - RECTTINYLYINGX;
@@ -1781,7 +1781,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 12:
         {
-            //			cout << "\n-----------------SQUAREHOLE--------------------\n";
+            //      cout << "\n-----------------SQUAREHOLE--------------------\n";
             if(((y - SQUAREHOLEXY) >= 0) && ((x - SQUAREHOLEXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - SQUAREHOLEXY;
                 sizeX = x - SQUAREHOLEXY;
@@ -1883,7 +1883,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 13:
         {
-            //			cout << "\n-----------------SQUARESMALL--------------------\n";
+            //      cout << "\n-----------------SQUARESMALL--------------------\n";
             if(((y - SQUARESMALLXY) >= 0) && ((x - SQUARESMALLXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - SQUARESMALLXY;
                 sizeX = x - SQUARESMALLXY;
@@ -1985,7 +1985,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 14:
         {
-            //			cout << "\n-----------------SQUARETINY--------------------\n";
+            //      cout << "\n-----------------SQUARETINY--------------------\n";
             if(((y - SQUARETINYXY) >= 0) && ((x - SQUARETINYXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - SQUARETINYXY;
                 sizeX = x - SQUARETINYXY;
@@ -2087,7 +2087,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 15:
         {
-            //			cout << "\n-----------------TRIANGLE--------------------\n";
+            //      cout << "\n-----------------TRIANGLE--------------------\n";
             if(((y - TRIANGLEXY) >= 0) && ((x - TRIANGLEXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - TRIANGLEXY;
                 sizeX = x - TRIANGLEXY;
@@ -2190,7 +2190,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 16:
         {
-            //			cout << "\n-----------------TRIANGLEMIRROR--------------------\n";
+            //      cout << "\n-----------------TRIANGLEMIRROR--------------------\n";
             if(((y - TRIANGLEXY) >= 0) && ((x - TRIANGLEXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - TRIANGLEXY;
                 sizeX = x - TRIANGLEXY;
@@ -2295,7 +2295,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 17:
         {
-            //			cout << "\n-----------------TRIANGLEHOLE--------------------\n";
+            //      cout << "\n-----------------TRIANGLEHOLE--------------------\n";
             if(((y - TRIANGLEHOLEX) >= 0) && ((x - TRIANGLEHOLEY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - TRIANGLEHOLEX;
                 sizeX = x - TRIANGLEHOLEY;
@@ -2399,7 +2399,7 @@ bool checkPositionGrid(Block & b, int x, int y, int **drawGrid, int sizeXGrid, c
         }
         case 18:
         {
-            //			cout << "\n-----------------PLATAFORM--------------------\n";
+            //      cout << "\n-----------------PLATAFORM--------------------\n";
             if(((y - PLATAFORMXY) >= 0) && ((x - PLATAFORMXY) >= 0) && ((drawGrid[x - 1][y] != 0) || (drawGrid[x][y + 1] != 0))){
                 sizeY = y - PLATAFORMXY;
                 sizeX = x - PLATAFORMXY;
@@ -3138,7 +3138,7 @@ void backtracking(int **drawGrid, Block * arrayBlocks, double * auxXmirror, int 
 
     /*int **auxDrawGrid = new int*[sizeXGrid];
     for(int i = 0; i < sizeXGrid; i++){
-    	auxDrawGrid[i] = new int[sizeYGrid];
+      auxDrawGrid[i] = new int[sizeYGrid];
     }
 
     for(int i = (sizeYGrid - 1); i >= 0; i--){
@@ -3148,28 +3148,31 @@ void backtracking(int **drawGrid, Block * arrayBlocks, double * auxXmirror, int 
     }//*/
 
     if(contBlocks == numBlocks){
-    	openFileWrite(numberXml, drawGrid, sizeXGrid, sizeXGridMatriz, incomplete);
-    	openFileWrite(numberXml++, arrayBlocks, numBlocks, auxXmirror);
+      //openFileWrite(numberXml, drawGrid, sizeXGrid, sizeXGridMatriz, incomplete);
+      //openFileWrite(numberXml++, arrayBlocks, numBlocks, auxXmirror);
         contNiveisCridos++;
         finished = true;
-/*if(contNiveisCridos > 70500){
-        for(int i = 0; i < sizeYGrid; i++){
-                for(int j = 0; j < sizeXGrid; j++){
-                        cout << drawGrid[j][i] << ' ';
-                }
-                cout << '\n';
+if(contNiveisCridos > 41968){
+for(int i = 0; i < sizeYGrid; i++){
+    for(int j = 0; j < sizeXGridMatriz; j++){
+        if(j == (sizeXGridMatriz - sizeXGrid)){
+            cout << "| ";
         }
-        cout << '\n';
+        cout << drawGrid[j][i] << ' ';
+    }
+    cout << '\n';
+}
+cout << '\n';
 }//*/
     } else{
         for(int i = (sizeYGrid - 1); i >= 0; i--){
-            for(int j = 1; j < sizeXGrid; j++){
+            for(int j = 20; j < sizeXGridMatriz; j++){
                 if(drawGrid[j][i] != 0){
                     if(((j - 1) >= 0) && (drawGrid[j - 1][i] == 0)){
                         if(checkPositionGrid(arrayBlocks[contBlocks], j - 1, i, drawGrid, sizeXGrid, sizeXGridMatriz, positionXinicial, xXml, yXml)){
-                        	arrayBlocks[contBlocks].setX(xXml);
-                        	arrayBlocks[contBlocks].setY(yXml);
-                        	auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
+                          arrayBlocks[contBlocks].setX(xXml);
+                          arrayBlocks[contBlocks].setY(yXml);
+                          auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
                             colocouObjeto = true;
                             auxRetornaMatrixEstadoAnterior = 0;
                             auxI = i;
@@ -3177,9 +3180,9 @@ void backtracking(int **drawGrid, Block * arrayBlocks, double * auxXmirror, int 
                         }
                     } else if(((i - 1) >= 0) && (drawGrid[j][i - 1] == 0)){
                         if(checkPositionGrid(arrayBlocks[contBlocks], j, (i - 1), drawGrid, sizeXGrid, sizeXGridMatriz, positionXinicial, xXml, yXml)){
-                        	arrayBlocks[contBlocks].setX(xXml);
-                        	arrayBlocks[contBlocks].setY(yXml);
-                        	auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
+                          arrayBlocks[contBlocks].setX(xXml);
+                          arrayBlocks[contBlocks].setY(yXml);
+                          auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
                             colocouObjeto = true;
                             auxRetornaMatrixEstadoAnterior = 0;
                             auxI = i - 1;
@@ -3187,9 +3190,9 @@ void backtracking(int **drawGrid, Block * arrayBlocks, double * auxXmirror, int 
                         }
                     } else if(((j + 1) < sizeXGrid) && drawGrid[j + 1][i] == 0){
                         if(checkPositionGrid(arrayBlocks[contBlocks], (j + 1), i, drawGrid, sizeXGrid, sizeXGridMatriz, positionXinicial, xXml, yXml)){
-                        	arrayBlocks[contBlocks].setX(xXml);
-                        	arrayBlocks[contBlocks].setY(yXml);
-                        	auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
+                          arrayBlocks[contBlocks].setX(xXml);
+                          arrayBlocks[contBlocks].setY(yXml);
+                          auxXmirror[contBlocks] = calculationObjectMirror(arrayBlocks[contBlocks], positionXinicial);
                             colocouObjeto = true;
                             auxRetornaMatrixEstadoAnterior = 1;
                             auxI = i;
@@ -3215,7 +3218,7 @@ void backtracking(int **drawGrid, Block * arrayBlocks, double * auxXmirror, int 
             }
         }
         /*for(int i = 0; i < sizeXGrid; i++){
-        	delete [] auxDrawGrid[i];
+          delete [] auxDrawGrid[i];
         }
         delete [] auxDrawGrid;//*/
 
